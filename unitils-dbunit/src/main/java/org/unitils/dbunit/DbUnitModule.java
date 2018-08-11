@@ -67,6 +67,7 @@ import org.unitils.dbunit.annotation.DataSet;
 import org.unitils.dbunit.annotation.DataSets;
 import org.unitils.dbunit.annotation.ExpectedDataSet;
 import org.unitils.dbunit.annotation.ExpectedDataSets;
+import org.unitils.dbunit.config.DbUnitConfig;
 import org.unitils.dbunit.datasetfactory.DataSetFactory;
 import org.unitils.dbunit.datasetfactory.DataSetResolver;
 import org.unitils.dbunit.datasetloadstrategy.DataSetLoadStrategy;
@@ -588,6 +589,10 @@ public class DbUnitModule implements Module {
 
         //set MetaHandler
         config.setProperty(DatabaseConfig.PROPERTY_METADATA_HANDLER, getDefaultDatabaseMetaHandler());
+        
+        // Support dbunit configurations in the unitils configuration file.
+        // It will replace the default values set before.
+        DbUnitConfig.getInstance().setDbUnitConfig(configuration, config);
 
         return connection;
     }
